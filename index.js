@@ -1,10 +1,13 @@
 const numSelector = document.querySelectorAll('.opt');
 const addSelection = document.querySelector('.current');
 const feedbackSection = document.querySelector('.feedback')
+const guessSection = document.querySelector('.guesses')
 
 let randomAnswer = [];
 let selectedNums = [];
 let guesses = 10;
+
+guessSection.setHTML(guesses)
 
 async function generateRandom() {
     let response = await fetch('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new');
@@ -34,12 +37,18 @@ function selectNumber(selNum) {
 
     if(selectedNums.length === 4){
         guesses--;
+        guessSection.setHTML(guesses)
         const hintHolder = document.createElement('div');
         hintHolder.classList.add('hintholder')
         for(const selSelNum of selectedNums){
             const hintDiv = document.createElement('div');
             hintDiv.setHTML(selSelNum);
             hintHolder.appendChild(hintDiv)
+        }
+
+        if(guesses === 0){
+            alert('YOU LOSE!!!!! Game will reload....');
+            location.reload()
         }
 
         const hintsArr = generateHints(selectedNums);
@@ -53,17 +62,18 @@ function selectNumber(selNum) {
         }
 
         if(hintsObj['right'] === 4){
-            alert('CORRECT!!!')
+            alert('CORRECT!!! You WIN!!! Game will reload....')
+            location.reload()
         }
 
         if(hintsObj['right'] && hintsObj['almost']){
-            completeHintDiv.setHTML(`There are/is ${hintsObj['right']} number(s) in the correct position and ${hintsObj['almost']} numbers that are not in the correct location`);
+            completeHintDiv.setHTML(`There is/are ${hintsObj['right']} correct number(s) in the correct position and ${hintsObj['almost']} correct number(s) that is/are not in the correct location`);
             hintHolder.appendChild(completeHintDiv)
         } else if (hintsObj['right']) {
-            completeHintDiv.setHTML(`There are ${hintsObj['right']} numbers in the correct position`);
+            completeHintDiv.setHTML(`There are ${hintsObj['right']} correct numbers in the correct position`);
             hintHolder.appendChild(completeHintDiv)
         } else if (hintsObj['almost']){
-            completeHintDiv.setHTML(`There are ${hintsObj['almost']} numbers that are not in the correct location`);
+            completeHintDiv.setHTML(`There are ${hintsObj['almost']} correct numbers that are not in the correct location`);
             hintHolder.appendChild(completeHintDiv)
         } else {
             completeHintDiv.setHTML(`There are no correct numbers`);

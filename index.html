@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Mastermind</title>
-        <link href="index.css" rel="stylesheet" />
 
-    </head>
-    <body>
-        <h1 class="title-div">Mastermind</h1>
-        <h2>Choose a Number:</h2>
-        <div class="options">
-            <div class="opt 0">0</div>
-            <div class="opt 1">1</div>
-            <div class="opt 2">2</div>
-            <div class="opt 3">3</div>
-            <div class="opt 4">4</div>
-            <div class="opt 5">5</div>
-            <div class="opt 6">6</div>
-            <div class="opt 7">7</div>
+<head>
+    <title>Mastermind</title>
+    <link href="index.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <h1 class="title-div">Mastermind</h1>
+    <div class="rules-guess">
+        <div class="rules">
+            <h2>Introduction:</h2>
+            <p>Welcome to the Mastermind game! This is a game where the CPU has generated a random combination of 4
+                numbers
+                from 0-7. Your job as the player is to pick 4 numbers and guess the correct combination. You will have
+                10
+                guesses. Good luck!</p>
         </div>
-        <h2>Currently Selected:</h2>
-        <div class="current"></div>
-        <h2>Feedback:</h2>
-        <div class="feedback"></div>
-    </body>
-    <script src="index.js"></script>
+        <div class="guess-flex">
+            <h2>Number of Guesses Remaining:</h2>
+            <div class="guesses"></div>
+        </div>
+    </div>
+    <div class="curr-select-feedback">
+        <div class="curr-select-feedback-sel">
+            <h2>Currently Selected:</h2>
+            <div class="current"></div>
+        </div>
+        <div>
+            <h2>Feedback:</h2>
+            <div class="feedback"></div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h2>Choose a Number:</h2>
+            <div class="options">
+                <div class="opt 0">0</div>
+                <div class="opt 1">1</div>
+                <div class="opt 2">2</div>
+                <div class="opt 3">3</div>
+                <div class="opt 4">4</div>
+                <div class="opt 5">5</div>
+                <div class="opt 6">6</div>
+                <div class="opt 7">7</div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+<script src="index.js"></script>
+
 </html>
