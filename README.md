@@ -22,10 +22,10 @@ Welcome to the Mastermind game! This is a game where the CPU has generated a ran
 ## Development
 - Used Live Server to launch a local development server to open a browser window with the HTML file created in this project
 - Set up my html structure to contain sections that would contain a space for the user to see their selections, for the user to see feedback and their previous selections, and numbers that could be selected
-- Created a JavaScript file to run as the script for the HTML file
-- In the JS file I added a click event listener to allow the user to select from the options of 0-7 that I provided in the HTML file and insert those values into an array that I created to hold those values. The information in this array is displayed in the selected section
+- Created a JavaScript file to run as the script for the HTML file. Used DOM manipulation throughout to display backend processes.
+- In the JS file I added a click event listener using DOM manipulation to allow the user to select from the options of 0-7 that I provided in the HTML file and insert those values into an array that I created to hold those values. The information in this array is displayed in the selected section
 - Made an API call to the random.org API to generate 4 values from 0-7 using the necessary parameters in the URL
-- Created functions to compare the user's selections to the random numbers generated from the API. Created hints and feedback to be displayed in the respective section using the analysis provided by the comparison functions
+- Created functions to compare the user's selections to the random numbers generated from the API. Created hints and feedback to be displayed using DOM manipulation in the respective section using the analysis provided by the comparison functions
 - Created a timer that will count down from 5 minutes and will cause the user to fail the game if they are unable to come up with the correct answer by the end of the countdown
 - Created a guess count that will decrement with each user guess until it reaches 0 which would cause the user to fail the game
 
