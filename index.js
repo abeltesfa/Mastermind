@@ -73,12 +73,13 @@ function selectNumber(selNum) {
         hintHolder.classList.add('hintholder')
         for(const selSelNum of selectedNums){
             const hintDiv = document.createElement('div');
+            hintDiv.classList.add('selHint')
             hintDiv.setHTML(selSelNum);
             hintHolder.appendChild(hintDiv)
         }
         //once guesses runs out, user fails and loses game. game will reload
         if(guesses === 0){
-            alert('YOU LOSE!!!!! Game will reload....');
+            alert('YOU LOSE!!!!! RAN OUT OF GUESSES!! Game will reload....');
             location.reload()
         }
 
@@ -105,10 +106,10 @@ function selectNumber(selNum) {
             completeHintDiv.setHTML(`There is/are ${hintsObj['right']} correct number(s) in the correct position and ${hintsObj['almost']} correct number(s) that is/are not in the correct location`);
             hintHolder.appendChild(completeHintDiv)
         } else if (hintsObj['right']) {
-            completeHintDiv.setHTML(`There are ${hintsObj['right']} correct numbers in the correct position`);
+            completeHintDiv.setHTML(`There is/are ${hintsObj['right']} correct number(s) in the correct position`);
             hintHolder.appendChild(completeHintDiv)
         } else if (hintsObj['almost']){
-            completeHintDiv.setHTML(`There are ${hintsObj['almost']} correct numbers that are not in the correct location`);
+            completeHintDiv.setHTML(`There is/are ${hintsObj['almost']} correct number(s) that are not in the correct location`);
             hintHolder.appendChild(completeHintDiv)
         } else {
             completeHintDiv.setHTML(`There are no correct numbers`);
