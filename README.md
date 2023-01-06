@@ -30,5 +30,5 @@ Welcome to the Mastermind game! This is a game where the CPU has generated a ran
 - Created a guess count that will decrement with each user guess until it reaches 0 which would cause the user to fail the game
 
 ## Running the Site
--Open the repository in VSCode and using the live server extension, open a browser window loading the HTML file.
--If the above technology is not available, use the necessary or available technology to load the HTML file to your browser.
+- Open the repository in VSCode and using the live server extension, open a browser window loading the HTML file.
+- If the above technology is not available, use the necessary or available technology to load the HTML file to your browser.
