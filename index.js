@@ -57,7 +57,7 @@ function selectNumber(selNum) {
         }
 
         if(hintsObj['right'] && hintsObj['almost']){
-            completeHintDiv.setHTML(`There are ${hintsObj['right']} numbers in the correct position and ${hintsObj['almost']} numbers that are not in the correct location`);
+            completeHintDiv.setHTML(`There are/is ${hintsObj['right']} number(s) in the correct position and ${hintsObj['almost']} numbers that are not in the correct location`);
             hintHolder.appendChild(completeHintDiv)
         } else if (hintsObj['right']) {
             completeHintDiv.setHTML(`There are ${hintsObj['right']} numbers in the correct position`);
@@ -96,6 +96,7 @@ function generateHints(pickedNums) {
     pickedNums.forEach((num, i) => {
         if(!dups.includes(num) && randomAnswer.includes(num)){
             hints.push('almost')
+            dups.push(num)
         }
     })
 
