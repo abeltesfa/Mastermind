@@ -17,7 +17,7 @@ function updateTimer() {
     let seconds = time % 60;
 
     if(time === 0){
-        alert('YOU LOSE! TIME RAN OUT!! Game will reload...');
+        alert(`YOU LOSE! TIME RAN OUT!! Correct answer was ${[...randomAnswer]}. Game will reload...`);
         location.reload();
     }
 
@@ -79,7 +79,7 @@ function selectNumber(selNum) {
         }
         //once guesses runs out, user fails and loses game. game will reload
         if(guesses === 0){
-            alert('YOU LOSE!!!!! RAN OUT OF GUESSES!! Game will reload....');
+            alert(`YOU LOSE!!!!! RAN OUT OF GUESSES!! Correct answer was ${[...randomAnswer]}. Game will reload....`);
             location.reload()
         }
 

@@ -51,7 +51,7 @@
 .feedback {
     display: flex;
     flex-direction: column;
-    min-height: 200px;
+    min-height: 300px;
 }
 
 .current {
