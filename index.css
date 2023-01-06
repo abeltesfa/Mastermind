@@ -2,6 +2,18 @@
     display: flex;
     justify-content: space-between;
     width: 500px;
+}
+
+.timer {
+    font-family: sans-serif;
+    background-color: white;
+    color: red;
+    display: inline-flex;
+    height: 70px;
+    width: 150px;
+    font-size: 40px;
+    align-items: center;
+    justify-content: center;
 
 }
 

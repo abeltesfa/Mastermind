@@ -1,8 +1,34 @@
 //selectors to grab html elements
 const numSelector = document.querySelectorAll('.opt');
 const addSelection = document.querySelector('.current');
-const feedbackSection = document.querySelector('.feedback')
-const guessSection = document.querySelector('.guesses')
+const feedbackSection = document.querySelector('.feedback');
+const guessSection = document.querySelector('.guesses');
+const timerEl = document.querySelector('.timer')
+
+//starting time of timer
+const startMinutes = 5;
+let time = startMinutes * 60;
+
+//run function every second
+setInterval(updateTimer, 1000);
+
+function updateTimer() {
+    const minutes = Math.floor(time/60);
+    let seconds = time % 60;
+
+    if(time === 0){
+        alert('YOU LOSE! TIME RAN OUT!! Game will reload...');
+        location.reload();
+    }
+
+    if(seconds < 10){
+        seconds = '0' + seconds
+    }
+
+    timerEl.innerHTML = `${minutes}:${seconds}`
+    time--;
+}
+
 
 //array that will populate random numbers
 let randomAnswer = [];
