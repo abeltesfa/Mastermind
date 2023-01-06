@@ -4,6 +4,7 @@ const feedbackSection = document.querySelector('.feedback')
 
 let randomAnswer = [];
 let selectedNums = [];
+let guesses = 10;
 
 async function generateRandom() {
     let response = await fetch('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new');
@@ -32,10 +33,13 @@ function selectNumber(selNum) {
     selectedNums.push(selNum)
 
     if(selectedNums.length === 4){
+        guesses--;
+        const hintHolder = document.createElement('div');
+        hintHolder.classList.add('hintholder')
         for(const selSelNum of selectedNums){
             const hintDiv = document.createElement('div');
             hintDiv.setHTML(selSelNum);
-            feedbackSection.appendChild(hintDiv)
+            hintHolder.appendChild(hintDiv)
         }
 
         const hintsArr = generateHints(selectedNums);
@@ -48,19 +52,25 @@ function selectNumber(selNum) {
             } else hintsObj[hintsArr[k]] += 1;
         }
 
+        if(hintsObj['right'] === 4){
+            alert('CORRECT!!!')
+        }
+
         if(hintsObj['right'] && hintsObj['almost']){
             completeHintDiv.setHTML(`There are ${hintsObj['right']} numbers in the correct position and ${hintsObj['almost']} numbers that are not in the correct location`);
-            feedbackSection.appendChild(completeHintDiv)
+            hintHolder.appendChild(completeHintDiv)
         } else if (hintsObj['right']) {
             completeHintDiv.setHTML(`There are ${hintsObj['right']} numbers in the correct position`);
-            feedbackSection.appendChild(completeHintDiv)
+            hintHolder.appendChild(completeHintDiv)
         } else if (hintsObj['almost']){
             completeHintDiv.setHTML(`There are ${hintsObj['almost']} numbers that are not in the correct location`);
-            feedbackSection.appendChild(completeHintDiv)
+            hintHolder.appendChild(completeHintDiv)
         } else {
             completeHintDiv.setHTML(`There are no correct numbers`);
             feedbackSection.appendChild(completeHintDiv)
         }
+
+        feedbackSection.appendChild(hintHolder)
 
         console.log(hintsArr)
         console.log(hintsObj)
