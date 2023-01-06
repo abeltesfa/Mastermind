@@ -1,40 +1,45 @@
+//selectors to grab html elements
 const numSelector = document.querySelectorAll('.opt');
 const addSelection = document.querySelector('.current');
 const feedbackSection = document.querySelector('.feedback')
 const guessSection = document.querySelector('.guesses')
 
+//array that will populate random numbers
 let randomAnswer = [];
+//array that will hold user's guesses
 let selectedNums = [];
-let guesses = 10;
 
+
+let guesses = 10;
+//set initial guess count
 guessSection.setHTML(guesses)
 
+//api call to generate random numbers
 async function generateRandom() {
     let response = await fetch('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new');
     let data = await response.text()
     return data;
 }
-
+//push randomly generated numbers into array
 generateRandom().then(data=> data.split('\n').slice(0,4).map((ranNum)=> randomAnswer.push(ranNum)));
 
-console.log(randomAnswer)
-
-
+//event listener to add clicked on number divs to selected array
 numSelector.forEach(num => {
     const selNum = num.classList[1];
     num.addEventListener('click', () => selectNumber(selNum))
 })
 
+//function to display selected numbers onto selected section
 function selectNumber(selNum) {
-    console.log(selNum)
-
     const pickedNum = document.createElement("div");
+    pickedNum.classList.add('sel')
     pickedNum.setHTML(selNum)
 
     addSelection.appendChild(pickedNum);
 
     selectedNums.push(selNum)
 
+    //every 4 selections is a guess, also need to run hints on each guess
     if(selectedNums.length === 4){
         guesses--;
         guessSection.setHTML(guesses)
@@ -45,27 +50,31 @@ function selectNumber(selNum) {
             hintDiv.setHTML(selSelNum);
             hintHolder.appendChild(hintDiv)
         }
-
+        //once guesses runs out, user fails and loses game. game will reload
         if(guesses === 0){
             alert('YOU LOSE!!!!! Game will reload....');
             location.reload()
         }
 
+        //generate hints array to parse
         const hintsArr = generateHints(selectedNums);
         let hintsObj = {};
         const completeHintDiv = document.createElement('div');
 
+        //transfer hintarray into object to count values
         for(let k = 0; k < hintsArr.length; k++){
             if(hintsObj[hintsArr[k]] === undefined){
                 hintsObj[hintsArr[k]] = 1;
             } else hintsObj[hintsArr[k]] += 1;
         }
 
+        //if hintObj returns 4 correct user wins game and game reloads
         if(hintsObj['right'] === 4){
             alert('CORRECT!!! You WIN!!! Game will reload....')
             location.reload()
         }
 
+        //hint messages
         if(hintsObj['right'] && hintsObj['almost']){
             completeHintDiv.setHTML(`There is/are ${hintsObj['right']} correct number(s) in the correct position and ${hintsObj['almost']} correct number(s) that is/are not in the correct location`);
             hintHolder.appendChild(completeHintDiv)
@@ -77,15 +86,13 @@ function selectNumber(selNum) {
             hintHolder.appendChild(completeHintDiv)
         } else {
             completeHintDiv.setHTML(`There are no correct numbers`);
-            feedbackSection.appendChild(completeHintDiv)
+            hintHolder.appendChild(completeHintDiv)
         }
 
+        //append hint message to feedback section
         feedbackSection.appendChild(hintHolder)
 
-        console.log(hintsArr)
-        console.log(hintsObj)
-
-
+        //clear user selection array and section
         selectedNums.length = 0;
         addSelection.innerHTML = "";
     }
@@ -96,6 +103,7 @@ function generateHints(pickedNums) {
     const hints = [];
     const dups = [];
 
+    //check for correct selections
     pickedNums.forEach((num, i) => {
         if(randomAnswer[i] === num) {
             hints.push('right');
@@ -103,6 +111,7 @@ function generateHints(pickedNums) {
         }
     });
 
+    //check for out of order correct selections
     pickedNums.forEach((num, i) => {
         if(!dups.includes(num) && randomAnswer.includes(num)){
             hints.push('almost')
