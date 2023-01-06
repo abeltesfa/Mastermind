@@ -7,10 +7,10 @@ Welcome to the Mastermind game! This is a game where the CPU has generated a ran
 - Languages: Javascript, HTML, CSS
 - Tools: Live Server
 
-##Picture of Site
+## Picture of Site
 ![image](https://user-images.githubusercontent.com/99838762/211006294-72b12938-5633-47e8-8266-0ca4e2db751f.png)
 
-##Features
+## Features
 -User is able to select from a range of numbers 0-7 and the user selection will appear in the selection section
 -User has 10 guesses to guess the random combination of 4 numbers. After 10 guesses the user fails the game.
 -There is a timer in the top right that will countdown from 5 minutes and the user will lose if they cannot guess before timer runs out
@@ -19,7 +19,7 @@ Welcome to the Mastermind game! This is a game where the CPU has generated a ran
 -If the user fails the game, an alert will let the user know they lost the game and will reveal the correct answer and then reload the game
 -If the user wins the game, an alert will let the user know they won the game and then reload the game
 
-##Development
+## Development
 -Used Live Server to launch a local development server to open a browser window with the HTML file created in this project
 -Set up my html structure to contain sections that would contain a space for the user to see their selections, for the user to see feedback and their previous selections, and numbers that could be selected
 -Created a JavaScript file to run as the script for the HTML file
@@ -29,6 +29,6 @@ Welcome to the Mastermind game! This is a game where the CPU has generated a ran
 -Created a timer that will count down from 5 minutes and will cause the user to fail the game if they are unable to come up with the correct answer by the end of the countdown
 -Created a guess count that will decrement with each user guess until it reaches 0 which would cause the user to fail the game
 
-##Running the Site
+## Running the Site
 -Open the repository in VSCode and using the live server extension, open a browser window loading the HTML file.
 -If the above technology is not available, use the necessary or available technology to load the HTML file to your browser.
