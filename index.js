@@ -35,24 +35,35 @@ let randomAnswer = [];
 //array that will hold user's guesses
 let selectedNums = [];
 
-
-let guesses = 10;
 //set initial guess count
+let guesses = 10;
+
 guessSection.setHTML(guesses)
 
 //api call to generate random numbers
-async function generateRandom() {
-    let response = await fetch('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new');
-    let data = await response.text()
-    return data;
-}
-//push randomly generated numbers into array
-generateRandom().then(data=> data.split('\n').slice(0,4).map((ranNum)=> randomAnswer.push(ranNum)));
+// async function generateRandom() {
+//     let response = await fetch('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new');
+//     let data = await response.text()
+//     return data;
+// }
+// //push randomly generated numbers into array
+// generateRandom().then(data=> {
+//     randomAnswer = data.split('\n').slice(0,4);
+// }
+//     );
+
+    randomAnswer = ['1','2','3','4']
+
+    console.log(randomAnswer)
 
 //event listener to add clicked on number divs to selected array
 numSelector.forEach(num => {
     const selNum = num.classList[1];
     num.addEventListener('click', () => selectNumber(selNum))
+})
+
+document.addEventListener('keypress', (e)=> {
+    selectNumber(e.key)
 })
 
 //function to display selected numbers onto selected section
@@ -130,21 +141,24 @@ function generateHints(pickedNums) {
     const hints = [];
     const dups = [];
 
+    let randomAnswerCopy = [...randomAnswer];
+
+    console.log(randomAnswerCopy)
     //check for correct selections
     pickedNums.forEach((num, i) => {
         if(randomAnswer[i] === num) {
             hints.push('right');
-            dups.push(num);
+            randomAnswerCopy.splice(i,1)
         }
     });
 
     //check for out of order correct selections
     pickedNums.forEach((num, i) => {
-        if(!dups.includes(num) && randomAnswer.includes(num)){
+        if(randomAnswerCopy.includes(num)){
             hints.push('almost')
-            dups.push(num)
+            randomAnswerCopy.splice(randomAnswerCopy.indexOf(num),1)
         }
     })
-
+    console.log(hints)
     return hints
 }
